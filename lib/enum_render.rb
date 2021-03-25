@@ -1,7 +1,9 @@
 require "enum_render/version"
+require "enum_render/railtie"
 
 module EnumRender
   class Error < StandardError; end
+
   extend ActiveSupport::Concern
 
   class_methods do

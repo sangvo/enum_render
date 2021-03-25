@@ -3,7 +3,7 @@ require_relative 'lib/enum_render/version'
 Gem::Specification.new do |spec|
   spec.name          = "enum_render"
   spec.version       = EnumRender::VERSION
-  spec.authors       = ["Sang Vo"]
+  spec.authors       = ["sangvo"]
   spec.email         = ["sangvo111@gmail.com"]
 
   spec.summary       = %q{Make enum translate friendly}

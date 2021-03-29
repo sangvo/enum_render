@@ -35,11 +35,10 @@ module EnumRender
         define_method("#{name}_option") do
           return nil if self.send(name).nil?
 
-          value = klass.send(name.to_s.pluralize)[self[name]]
-          label = klass.new(name => value).send("#{name}_name")
+          label = klass.new(name => self[name]).send("#{name}_name")
           {
-            "id" => value,
-            "label" => label
+            "key" => self[name],
+            "value" => label
           }
         end
 
@@ -47,11 +46,20 @@ module EnumRender
         define_singleton_method("#{name}_options") do
           self.send(name.to_s.pluralize).map do |k, _|
             label = self.new(name => k).send("#{name}_name")
-            value = self.new(name => k).send("#{name}_value")
+            key = self.new(name => k).send("#{name}")
             {
-              "id" => value,
-              "label" => label
+              "key" => key,
+              "value" => label
             }
+          end
+        end
+
+        detect_enum_conflict!(name, "#{name}_select", true)
+        define_singleton_method("#{name}_select") do
+          self.send(name.to_s.pluralize).map do |k, _|
+            label = self.new(name => k).send("#{name}_name")
+            key = self.new(name => k).send("#{name}")
+            [label, key]
           end
         end
       end

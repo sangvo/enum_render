@@ -1,9 +1,8 @@
+Inspired by the [template](https://github.com/huacnlee/enumize)
+
 # EnumRender
 Make enum translate friendly
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/enum_render`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -17,29 +16,67 @@ And then execute:
 
     $ bundle install
 
-Or install it yourself as:
-
-    $ gem install enum_render
-
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+  # app/model/event.rb
+class Event
+  enum status: {pending: 0, approved: 1, declined: 2}
+end
+```
 
-## Development
+In I18n translate file:
+```yaml
+# config/locales/en.yml
+en:
+  enums:
+    event:
+      status:
+        pending: "Pending"
+        approved: "Approved"
+        declined: "Declined"
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+# config/locales/ja.yml
+ja:
+  enums:
+    event:
+      status:
+      pending: "保留中"
+      approved: "承認済み"
+      declined: "辞退"
+```
+We have methods: `Event.statuses` and `Event.first.status`
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+After install we have methods:
 
-## Contributing
+```ruby
+[2] pry(main)> Event.status_options
+[{"key"=>"pending", "value"=>"保留中"}, {"key"=>"approved", "value"=>"承認済み"}, {"key"=>"declined", "value"=>"辞退"}]
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/enum_render. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/enum_render/blob/master/CODE_OF_CONDUCT.md).
+```ruby
+[6] pry(main)> Event.first.status_option
+{"key"=>"approved", "value"=>"承認済み"}
+```
 
+```ruby
+[9] pry(main)> Event.first.status_name
+=> "承認済み"
+```
 
+```ruby
+[8] pry(main)> Event.first.status_value
+=> 1
+```
+
+```ruby
+[10] pry(main)> Event.status_select
+=> [["保 留 中 ", "pending"], ["承 認 済 み ", "approved"], ["辞 退 ", "declined"]]
+```
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
 
-Everyone interacting in the EnumRender project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/enum_render/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the EnumRender project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/sangvo/enum_render/blob/master/CODE_OF_CONDUCT.md).

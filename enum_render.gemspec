@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["sangvo"]
   spec.email         = ["sangvo111@gmail.com"]
 
-  spec.summary       = %q{Make enum translate friendly}
-  spec.description   = %q{Make enum dropdown friendly}
+  spec.summary       = %q{Translate enum friendly}
+  spec.description   = %q{Extend methods enum to I18n enum in Rails}
   spec.homepage      = "https://github.com/sangvo/enum_render.git"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")

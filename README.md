@@ -1,7 +1,7 @@
-Inspired by the [template](https://github.com/huacnlee/enumize)
+Customize from [enumize](https://github.com/huacnlee/enumize)
 
 # EnumRender
-Make enum translate friendly
+Extend methods enum to I18n enum in Rails
 
 
 ## Installation
@@ -9,7 +9,7 @@ Make enum translate friendly
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'enum_render'
+gem 'enum_render', "~> 0.2"
 ```
 
 And then execute:

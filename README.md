@@ -9,7 +9,7 @@ Extend methods enum to I18n enum in Rails
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'enum_render', "~> 0.2"
+gem 'enum_render', "~> 1.0"
 ```
 
 And then execute:
@@ -73,6 +73,23 @@ After install we have methods:
 [10] pry(main)> Event.status_select
 => [["保 留 中 ", "pending"], ["承 認 済 み ", "approved"], ["辞 退 ", "declined"]]
 ```
+## Add validate for enum
+Issues: https://github.com/rails/rails/issues/13971
+
+Currently, if a "bad" value (say, "canceled") is passed in, an ArgumentError is raised.
+
+After install you can validate them by `inclusion` validates
+
+```ruby
+
+  # app/model/event.rb
+  class Event
+    enum status: {pending: 0, approved: 1, declined: 2}
+
+    validates :status, presence: true, inclusion: {in: statuses.keys}
+  end
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
